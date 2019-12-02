@@ -34,7 +34,7 @@ func main() {
 		fuelLeft := num
 
 		for {
-			fuelLeft = calc(fuelLeft) // convert to string to use same method
+			fuelLeft = calc(fuelLeft)
 			if fuelLeft < 0 {
 				break
 			}
