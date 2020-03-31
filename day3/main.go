@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 )
@@ -38,13 +39,18 @@ func getInput() ([]string, []string) {
 
 func intersectionPoints(first []point, second []point) []point {
 	var intersections []point
-	for _, i := range first {
-		for _, j := range second {
+	minSteps := math.MaxInt32
+	for firstStep, i := range first {
+		for secondStep, j := range second {
 			if i.x == j.x && i.y == j.y {
 				intersections = append(intersections, i)
+				if firstStep+secondStep < minSteps && firstStep != 0 {
+					minSteps = firstStep + secondStep
+				}
 			}
 		}
 	}
+	fmt.Println(minSteps)
 	return intersections
 }
 
@@ -53,7 +59,8 @@ func main() {
 	firstC := coordinates(first)
 	secondC := coordinates(second)
 	fmt.Println("Calculate intersections")
-	fmt.Println(intersectionPoints(firstC, secondC))
+	intersectionPoints(firstC, secondC)
+
 }
 
 type point struct {
